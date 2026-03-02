@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSC DIDI STUDY CENTER</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#f4f7fb;color:#333;scroll-behavior:smooth;}
+a{text-decoration:none;color:inherit;}
+
+header{
+background:#0b3d91;
+color:white;
+padding:15px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:fixed;
+width:100%;
+top:0;
+z-index:1000;
+}
+
+header h1{font-size:22px;font-weight:800;}
+nav a{margin-left:20px;color:white;font-weight:500;}
+
+.hero{
+height:100vh;
+background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f');
+background-size:cover;
+background-position:center;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+padding:0 20px;
+}
+
+.hero h2{font-size:48px;font-weight:800;}
+.hero p{margin:15px 0;font-size:18px;}
+.hero button{
+padding:12px 30px;
+background:#ffcc00;
+border:none;
+border-radius:5px;
+font-weight:600;
+cursor:pointer;
+}
+
+.section{
+padding:80px 8%;
+text-align:center;
+}
+
+.section h2{
+font-size:34px;
+margin-bottom:40px;
+color:#0b3d91;
+}
+
+.cards{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:25px;
+}
+
+.card{
+background:white;
+padding:25px;
+width:280px;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+.card:hover{transform:translateY(-10px);}
+.card h3{margin-bottom:10px;color:#0b3d91;}
+
+.testimonial{
+background:#0b3d91;
+color:white;
+padding:60px 8%;
+}
+
+.testimonial-box{
+max-width:700px;
+margin:auto;
+}
+
+form{
+max-width:600px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+form input, form textarea{
+padding:12px;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+form button{
+background:#0b3d91;
+color:white;
+padding:12px;
+border:none;
+cursor:pointer;
+font-weight:600;
+}
+
+.faq-item{
+margin-bottom:15px;
+text-align:left;
+}
+
+footer{
+background:#082c6c;
+color:white;
+padding:40px 8%;
+display:flex;
+flex-wrap:wrap;
+justify-content:space-between;
+}
+
+footer div{margin-bottom:20px;}
+footer a{display:block;margin-bottom:8px;color:#ccc;}
+
+.copy{
+background:#061d4d;
+color:white;
+text-align:center;
+padding:10px;
+}
+
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:15px;
+border-radius:50%;
+font-size:22px;
+text-align:center;
+}
+
+@media(max-width:768px){
+.hero h2{font-size:32px;}
+.cards{flex-direction:column;align-items:center;}
+footer{flex-direction:column;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>DSC DIDI STUDY CENTER</h1>
+<nav>
+<a href="#home">Home</a>
+<a href="#courses">Courses</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
+<section class="hero" id="home">
+<h2>Speak English Confidently & Achieve Success!</h2>
+<p>Premium Spoken English & Personality Development Institute</p>
+<button onclick="document.getElementById('admission').scrollIntoView()">Admission Open 2026</button>
+</section>
+
+<section class="section" id="about">
+<h2>About Us</h2>
+<p>DSC Didi Study Center is committed to building confident English speakers with practical learning methods, expert faculty guidance and small batch focus.</p>
+</section>
+
+<section class="section" id="courses">
+<h2>Our Courses</h2>
+<div class="cards">
+<div class="card">
+<h3>Basic to Advanced English</h3>
+<p>Complete speaking course for all levels.</p>
+</div>
+<div class="card">
+<h3>Grammar & Vocabulary</h3>
+<p>Strong foundation building sessions.</p>
+</div>
+<div class="card">
+<h3>Interview Preparation</h3>
+<p>Mock interviews & personality training.</p>
+</div>
+<div class="card">
+<h3>Public Speaking</h3>
+<p>Stage confidence & communication mastery.</p>
+</div>
+</div>
+</section>
+
+<section class="testimonial">
+<div class="testimonial-box">
+<h2>What Students Say</h2>
+<p>"Best spoken English institute! My confidence improved within 2 months."</p>
+</div>
+</section>
+
+<section class="section" id="admission">
+<h2>Online Admission Form</h2>
+<form>
+<input type="text" placeholder="Full Name" required>
+<input type="tel" placeholder="Mobile Number" required>
+<input type="email" placeholder="Email Address">
+<textarea placeholder="Your Message"></textarea>
+<button type="submit">Submit Admission</button>
+</form>
+</section>
+
+<section class="section">
+<h2>Frequently Asked Questions</h2>
+<div class="faq-item">
+<strong>How long is the course?</strong>
+<p>Course duration is 1 months.</p>
+</div>
+</div>
+<section> 
+<strong>Are exercises available?</strong>
+<p>Yes, exercises are available of DSC DIDI STUDY CENTER itself.</p>
+</div>
+
+<section class="section" id="contact">
+<h2>Contact Us</h2>
+<p>📞 Call/WhatsApp: 7070496842</p>
+<p>📍 Address: DSC(DIDI STUDY CENTER), Indrapuri, Road no. 2A, Near North Patel Nagar, House no. 27</p>
+<iframe src="https://maps.google.com/maps?q=DSC(DIDI STUDY CENTER)House no. 27, Textbook Colony, 2A, Indrapuri Rd, Indrapuri, Keshri Nagar, Patna, Bihar 800024, India&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="300"></iframe>
+</section>
+
+<footer>
+<div>
+<h3>Quick Links</h3>
+<a href="#">Home</a>
+<a href="#">Courses</a>
+<a href="#">Admission</a>
+</div>
+
+<div>
+<h3>Contact</h3>
+<p>Phone: 7070496842</p>
+<p>Email: komalpatna2007@gmail.com</p>
+</div>
+
+<div>
+<h3>Follow Us</h3>
+<a href="#"></a>
+<a href="#"></a>
+<a href="#"></a>
+</div>
+</footer>
+
+<div class="copy">
+© 2026 DSC Didi Study Center | All Rights Reserved
+</div>
+
+<a href="https://wa.me/7070496842" class="whatsapp">💬</a>
+
+</body>
+</html>
