@@ -214,13 +214,99 @@ footer{flex-direction:column;}
 
 <section class="section" id="admission">
 <h2>Online Admission Form</h2>
-<form>
-<input type="text" placeholder="Full Name" required>
-<input type="tel" placeholder="Mobile Number" required>
-<input type="email" placeholder="Email Address">
-<textarea placeholder="Your Message"></textarea>
+
+<form id="admissionForm">
+<input type="text" id="name" placeholder="Full Name" required>
+<input type="tel" id="mobile" placeholder="Mobile Number" required>
+<input type="email" id="email" placeholder="Email Address">
+<textarea id="message" placeholder="Your Message"></textarea>
+
+<label>Upload Payment Screenshot:</label>
+<input type="file" id="screenshot" accept="image/*">
+
 <button type="submit">Submit Admission</button>
 </form>
+
+<div class="qr-box">
+<h3>Scan & Pay Admission Fee</h3>
+<img src="qr-payment.png" alt="Payment QR Code">
+<p>UPI: 7070496842@upi</p>
+</div>
+
+<br>
+<!-- Google Pay Button -->
+<button id="googlePayButton" style="background:#ff9800;color:white;padding:12px 20px;border:none;border-radius:5px;cursor:pointer;">
+    Pay Online via Google Pay
+</button>
+
+<!-- Google Pay API Script -->
+<script async src="https://pay.google.com/gp/p/js/pay.js"></script>
+
+<script>
+  let paymentsClient = null;
+
+  function getGooglePayClient() {
+    if (!paymentsClient) {
+      paymentsClient = new google.payments.api.PaymentsClient({
+        environment: 'TEST' // 'PRODUCTION' for live mode
+      });
+    }
+    return paymentsClient;
+  }
+
+  function onGooglePayLoaded() {
+    const client = getGooglePayClient();
+
+    const paymentDataRequest = {
+      apiVersion: 2,
+      apiVersionMinor: 0,
+      allowedPaymentMethods: [{
+        type: 'CARD',
+        parameters: {
+          allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+          allowedCardNetworks: ['MASTERCARD', 'VISA']
+        },
+        tokenizationSpecification: {
+          type: 'PAYMENT_GATEWAY',
+          parameters: {
+            'gateway': 'example',
+            'gatewayMerchantId': 'exampleGatewayMerchantId'
+          }
+        }
+      }],
+      merchantInfo: {
+        merchantName: "DSC Didi Study Center",
+        merchantId: '01234567890123456789'
+      },
+      transactionInfo: {
+        totalPriceStatus: 'FINAL',
+        totalPrice: '500.00',
+        currencyCode: 'INR'
+      }
+    };
+
+    client.loadPaymentData(paymentDataRequest)
+      .then(function(paymentData) {
+        console.log(paymentData);
+        alert('Payment Successful!');
+      })
+      .catch(function(err) {
+        console.error(err);
+        alert('Payment Failed!');
+      });
+  }
+
+  // Initialize Google Pay Button
+  const googlePayButton = document.getElementById('googlePayButton');
+  googlePayButton.addEventListener('click', onGooglePayLoaded);
+</script>
+
+<br><br>
+
+<button onclick="downloadReceipt()" style="background:#28a745;color:white;padding:12px 20px;border:none;border-radius:5px;cursor:pointer;">
+Download Payment Receipt
+</button>
+
 </section>
 
 <section class="section">
