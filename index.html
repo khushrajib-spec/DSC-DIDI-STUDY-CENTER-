@@ -157,7 +157,24 @@ text-align:center;
 .cards{flex-direction:column;align-items:center;}
 footer{flex-direction:column;}
 }
+
+#qr-container {
+    display: none;
+    text-align: center;
+}
+
+#qr-container img {
+    max-width: 300px;
+}
+
+#payment-amount {
+    font-size: 24px;
+    margin: 20px 0;
+    font-weight: bold;
+    color: #0b3d91;
+}
 </style>
+
 </head>
 
 <body>
@@ -227,79 +244,16 @@ footer{flex-direction:column;}
 <button type="submit">Submit Admission</button>
 </form>
 
-<div class="qr-box">
-<h3>Scan & Pay Admission Fee</h3>
-<img src="qr-payment.png" alt="Payment QR Code">
-<p>UPI: 8709017410-2@ibl</p>
+<!-- Payment QR Code and Amount Display -->
+<div id="qr-container">
+    <h3>Payment of ₹500</h3>
+    <div id="payment-amount">₹500</div>
+    <img id="qr-code" src="qr-payment.png" alt="Payment QR Code">
 </div>
 
-<br>
-<!-- Google Pay Button -->
-<button id="googlePayButton" style="background:#ff9800;color:white;padding:12px 20px;border:none;border-radius:5px;cursor:pointer;">
-    Pay Online via Google Pay
+<button id="payButton" style="background:#ff9800;color:white;padding:12px 20px;border:none;border-radius:5px;cursor:pointer;">
+    Pay Online
 </button>
-
-<!-- Google Pay API Script -->
-<script async src="https://pay.google.com/gp/p/js/pay.js"></script>
-
-<script>
-  let paymentsClient = null;
-
-  function getGooglePayClient() {
-    if (!paymentsClient) {
-      paymentsClient = new google.payments.api.PaymentsClient({
-        environment: 'TEST' // 'PRODUCTION' for live mode
-      });
-    }
-    return paymentsClient;
-  }
-
-  function onGooglePayLoaded() {
-    const client = getGooglePayClient();
-
-    const paymentDataRequest = {
-      apiVersion: 2,
-      apiVersionMinor: 0,
-      allowedPaymentMethods: [{
-        type: 'CARD',
-        parameters: {
-          allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
-          allowedCardNetworks: ['MASTERCARD', 'VISA']
-        },
-        tokenizationSpecification: {
-          type: 'PAYMENT_GATEWAY',
-          parameters: {
-            'gateway': 'PhonePe',
-            'gatewayMerchantId': '8709017410-2@ibl'
-          }
-        }
-      }],
-      merchantInfo: {
-        merchantName: "DSC Didi Study Center",
-        merchantId: '8709017410-2@ibl'
-      },
-      transactionInfo: {
-        totalPriceStatus: 'FINAL',
-        totalPrice: '500.00',
-        currencyCode: 'INR'
-      }
-    };
-
-    client.loadPaymentData(paymentDataRequest)
-      .then(function(paymentData) {
-        console.log(paymentData);
-        alert('Payment Successful!');
-      })
-      .catch(function(err) {
-        console.error(err);
-        alert('Payment Failed!');
-      });
-  }
-
-  // Initialize Google Pay Button
-  const googlePayButton = document.getElementById('googlePayButton');
-  googlePayButton.addEventListener('click', onGooglePayLoaded);
-</script>
 
 <br><br>
 
@@ -313,8 +267,7 @@ Download Payment Receipt
 <h2>Frequently Asked Questions</h2>
 <div class="faq-item">
 <strong>How long is the course?</strong>
-<p>Course duration is 1 months.</p>
-</div>
+<p>Course duration is 1 month.</p>
 </div>
 <section> 
 <strong>Are exercises available?</strong>
@@ -356,6 +309,18 @@ Download Payment Receipt
 
 <a href="https://wa.me/7070496842" class="whatsapp">💬</a>
 
+<script>
+document.getElementById("payButton").addEventListener("click", function() {
+    // Show the QR code and amount for payment
+    document.getElementById("qr-container").style.display = "block";
+
+    // Generate the QR Code for UPI payment link
+    var upiLink = "upi://pay?pa=8709017410-2@ibl&pn=DSC%20Didi%20Study%20Center&mc=8709017410-2@ibl&tid=payment1234&am=500.00&cu=INR";
+    var qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?data=" + encodeURIComponent(upiLink) + "&size=300x300";
+    document.getElementById("qr-code").src = qrCodeUrl;
+});
+</script>
+
 <!-- WhatsApp Auto Message JavaScript -->
 <script>
 document.getElementById("admissionForm").addEventListener("submit", function(e){
@@ -378,9 +343,5 @@ document.getElementById("admissionForm").addEventListener("submit", function(e){
     alert("Form submitted! Redirecting to WhatsApp...");
 });
 </script>
-
 </body>
 </html>
-
-
-
